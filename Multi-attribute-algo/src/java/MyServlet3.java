@@ -1,0 +1,128 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+
+/**
+ *
+ * @author sreepradhanathirumalaiswami
+ */
+public class MyServlet3 extends HttpServlet{
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MyServlet3</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet MyServlet3 at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            */
+             JFrame frame = new JFrame("Slider Example");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setContentPane(new SwingSliderExample());
+    frame.pack();
+    frame.setVisible(true);
+            out.println("<a href=hello?urladdr1='MyServlet'>Clickhere </a>");
+
+            /*ServletContext context= getServletContext();
+            RequestDispatcher rd= context.getRequestDispatcher("/hello");
+            rd.forward(request, response);
+        */
+             } finally {
+            out.close();
+        }
+    } 
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /** 
+     * Handles the HTTP <code>GET</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
+    } 
+
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /** 
+     * Returns a short description of the servlet.
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
+class SwingSliderExample extends JPanel {
+
+  public SwingSliderExample() {
+
+    super(true);
+    this.setLayout(new BorderLayout());
+    JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+    //out.println("INSIDE SLIDER");
+    slider.setMinorTickSpacing(2);
+    slider.setMajorTickSpacing(10);
+    slider.setPaintTicks(true);
+    slider.setPaintLabels(true);
+
+    // We'll just use the standard numeric labels for now...
+    slider.setLabelTable(slider.createStandardLabels(10));
+
+    add(slider, BorderLayout.CENTER);
+  }
+
+  public static void main(String s[]) {
+    JFrame frame = new JFrame("Slider Example");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setContentPane(new SwingSliderExample());
+    frame.pack();
+    frame.setVisible(true);
+  }
+}
